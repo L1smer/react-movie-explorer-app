@@ -15,12 +15,15 @@ export type filmDataType = {
 
 interface FilmCardProps {
   filmData: filmDataType;
+  isFavorite: boolean;
+  onToggleFavorite: (movie: filmDataType) => void;
 }
 
-export default function FilmCard({ filmData }: FilmCardProps) {
-  function rightYear(year: string) {
+export default function FilmCard({ filmData, isFavorite, onToggleFavorite }: FilmCardProps) {
+  
+	function rightYear(year: string) {
     if (year.includes("–")) {
-      const normalizedYear = year.replace("–", "-"); 
+      const normalizedYear = year.replace("–", "-");
       const [start, end] = normalizedYear.split("-");
 
       if (!end || end.trim() === "") {
@@ -34,8 +37,8 @@ export default function FilmCard({ filmData }: FilmCardProps) {
   }
 
   return (
-    <li>
-      <h5>{filmData.Title}</h5>
+    <li onClick={() => onToggleFavorite(filmData)}>
+      <h5>{filmData.Title} {isFavorite && "❤️"}</h5>
       <p>{rightYear(filmData.Year)}</p>
       <img src={filmData.Poster} alt="" />
     </li>
