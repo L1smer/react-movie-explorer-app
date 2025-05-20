@@ -20,7 +20,7 @@ export default function useCachedFetch({ parameter }: useCachedFetchProps) {
     }
 
     setLoading(true);
-    fetch(`http://www.omdbapi.com/?apikey=c5dffd79&s=${parameter}`)
+    fetch(`https://www.omdbapi.com/?apikey=c5dffd79&s=${parameter}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.Response === "True") {
