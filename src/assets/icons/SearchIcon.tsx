@@ -1,4 +1,3 @@
-// File: src/assets/icons/SearchIcon.tsx
 interface SearchIconProps {
   size?: number;
   active?: boolean;

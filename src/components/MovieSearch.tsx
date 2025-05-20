@@ -49,7 +49,7 @@ export default function MovieSearch({
 
       {loading || isDebouncing ? (
         <p className={styles.message}>Loading...</p>
-      ) : visibleMovies.length > 0 && searchTerm.trim() ? (
+      ) : visibleMovies.length > 0 ? (
         <ul className={styles.flex}>
           {visibleMovies.map((movie) => (
             <FilmCard
