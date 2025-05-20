@@ -11,10 +11,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  list-style: none;
 }
 
 body {
   font-family: 'Segoe UI', sans-serif;
+  height: 100%;
 }
 
 .app-wrapper.light {
@@ -33,7 +35,7 @@ body {
 }
 
 .mainContent {
-  max-width: 1200px;
+  max-width: 1700px;
   margin: 2rem auto;
   padding: 0 1rem;
 }

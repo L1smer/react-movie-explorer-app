@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import type { omdbSearchResponseType } from "../components/FIlmCard";
+import type { omdbSearchResponseType } from "../components/FilmCard";
 
 interface useCachedFetchProps {
   parameter: string;

@@ -1,3 +1,6 @@
+import styles from "../MovieSearch.module.css";
+import { useTheme } from "../context/ThemeContext";
+
 export type omdbSearchResponseType = {
   Search: filmDataType[];
   totalResults: string;
@@ -19,9 +22,16 @@ interface FilmCardProps {
   onToggleFavorite: (movie: filmDataType) => void;
 }
 
-export default function FilmCard({ filmData, isFavorite, onToggleFavorite }: FilmCardProps) {
-  
-	function rightYear(year: string) {
+export default function FilmCard({
+  filmData,
+  isFavorite,
+  onToggleFavorite,
+}: FilmCardProps) {
+
+  const { theme } = useTheme();
+   const cardClass = `${styles.card} ${theme === "dark" ? styles.dark : ""}`;
+
+  function rightYear(year: string) {
     if (year.includes("–")) {
       const normalizedYear = year.replace("–", "-");
       const [start, end] = normalizedYear.split("-");
@@ -37,10 +47,14 @@ export default function FilmCard({ filmData, isFavorite, onToggleFavorite }: Fil
   }
 
   return (
-    <li onClick={() => onToggleFavorite(filmData)}>
-      <h5>{filmData.Title} {isFavorite && "❤️"}</h5>
-      <p>{rightYear(filmData.Year)}</p>
-      <img src={filmData.Poster} alt="" />
+    <li className={cardClass}  onClick={() => onToggleFavorite(filmData)}>
+      <span className={styles.span}>
+        <h5 className={styles.titleRow}>
+          {filmData.Title} {isFavorite && "❤️"}
+        </h5>
+        <p className={styles.year}>{rightYear(filmData.Year)}</p>
+      </span>
+      <img className={styles.poster} src={filmData.Poster} alt="" />
     </li>
   );
 }
