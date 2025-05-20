@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import type { filmDataType } from "./components/FilmCard";
 import { useTheme } from "./context/ThemeContext";
 
+
 export default function App() {
   const { theme } = useTheme();
   const [favoriteData, setFavoriteData] = useState<filmDataType[]>(() => {
@@ -57,9 +58,9 @@ export default function App() {
             onToggleFavorite={toggleFavorite}
           />
         ) : (
-          <div>
-            <h2>Welcome to Movie Explorer</h2>
-            <p>Use the search icon to find movies and mark your favorites.</p>
+          <div className="welcomeBlock">
+            <h2 className="welcomeTitle">Welcome to Movie Explorer</h2>
+            <p className="welcomeP">Use the search icon to find movies and mark your favorites.</p>
           </div>
         )}
       </div>

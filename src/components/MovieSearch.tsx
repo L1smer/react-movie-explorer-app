@@ -1,4 +1,3 @@
-// File: src/components/MovieSearch.tsx
 import { useState } from "react";
 import useDebounce from "../hooks/useDebounce";
 import useCachedFetch from "../hooks/useCachedFetch";
@@ -20,14 +19,21 @@ export default function MovieSearch({
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   const debouncedSearchTerm = useDebounce(searchTerm);
-  const { filmData, loading } = useCachedFetch({ parameter: debouncedSearchTerm });
+  const { filmData, loading } = useCachedFetch({
+    parameter: debouncedSearchTerm,
+  });
 
-  const isFavorite = (movie: filmDataType) =>
-    favorites.some((f) => f.imdbID === movie.imdbID);
+  const isFavorite = (movie: filmDataType) => {
+    return favorites.some((f) => f.imdbID === movie.imdbID);
+	}
+
+  const isDebouncing = searchTerm !== debouncedSearchTerm;
 
   const visibleMovies = isShowingOnlyFavorites
     ? favorites
-    : filmData?.Search || [];
+    : !isDebouncing && filmData?.Search
+    ? filmData.Search
+    : [];
 
   return (
     <div className={styles.container}>
@@ -41,11 +47,11 @@ export default function MovieSearch({
         />
       )}
 
-      {loading && !isShowingOnlyFavorites && <p className={styles.message}>Loading...</p>}
-
-      {visibleMovies.length > 0 ? (
+      {loading || isDebouncing ? (
+        <p className={styles.message}>Loading...</p>
+      ) : visibleMovies.length > 0 && searchTerm.trim() ? (
         <ul className={styles.flex}>
-          {visibleMovies.map((movie: filmDataType) => (
+          {visibleMovies.map((movie) => (
             <FilmCard
               key={movie.imdbID}
               filmData={movie}
@@ -56,9 +62,15 @@ export default function MovieSearch({
         </ul>
       ) : (
         <p className={styles.message}>
-          {isShowingOnlyFavorites
-            ? "No favorite movies yet."
-            : "No results found."}
+          {isShowingOnlyFavorites ? (
+            "No favorite movies yet."
+          ) : searchTerm.trim() === "" ? (
+            <span className={styles.waitingMessage}>
+              Waiting for your command!
+            </span>
+          ) : (
+            `No results for "${searchTerm}"`
+          )}
         </p>
       )}
     </div>

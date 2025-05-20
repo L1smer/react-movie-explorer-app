@@ -47,10 +47,10 @@ export default function FilmCard({
   }
 
   return (
-    <li className={cardClass}  onClick={() => onToggleFavorite(filmData)}>
+    <li className={`${cardClass} ${isFavorite ? styles.favorite : ""}`} onClick={() => onToggleFavorite(filmData)}>
       <span className={styles.span}>
         <h5 className={styles.titleRow}>
-          {filmData.Title} {isFavorite && "❤️"}
+          {filmData.Title}
         </h5>
         <p className={styles.year}>{rightYear(filmData.Year)}</p>
       </span>

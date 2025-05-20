@@ -94,8 +94,17 @@
   color: gray;
 }
 
+.favorite {
+	border: 2px solid gold;
+}
+
 .message {
   font-size: 1.1rem;
   text-align: center;
   margin-top: 2rem;
+}
+
+.waitingMessage {
+	font-size: 24px;
+	margin-top: 50px;
 }

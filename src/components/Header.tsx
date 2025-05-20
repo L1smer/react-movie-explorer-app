@@ -1,5 +1,4 @@
 import styles from "../Header.module.css";
-import HomeIcon from "../assets/icons/HomeIcon";
 import StarIcon from "../assets/icons/StarIcon";
 import ThemeIcon from "../assets/icons/ThemeIcon";
 import SearchIcon from "../assets/icons/SearchIcon";
@@ -25,7 +24,6 @@ export default function Header({
   return (
     <header className={styles.header}>
       <button className={styles.title} onClick={onShowHome} title="Home">
-        <HomeIcon size={24} />
         Movie Explorer
       </button>
 
