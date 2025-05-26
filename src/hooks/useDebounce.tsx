@@ -9,7 +9,7 @@ export default function useDebounce(searchValue: string) {
 		},800)
 
 		return () => {
-			clearInterval(timeoutId)
+			clearTimeout(timeoutId)
 		}
 	},[searchValue])
 
