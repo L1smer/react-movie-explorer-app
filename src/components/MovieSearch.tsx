@@ -25,13 +25,13 @@ export default function MovieSearch({
 
   const isFavorite = (movie: filmDataType) => {
     return favorites.some((f) => f.imdbID === movie.imdbID);
-	}
+  };
 
   const isDebouncing = searchTerm !== debouncedSearchTerm;
 
   const visibleMovies = isShowingOnlyFavorites
     ? favorites
-    : !isDebouncing && filmData?.Search
+    : !isDebouncing && searchTerm.trim() !== "" && filmData?.Search
     ? filmData.Search
     : [];
 
